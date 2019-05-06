@@ -226,7 +226,7 @@ public class InGameTimer extends AnimationTimer {
 			Explosion explosion = explosionIter.next();
 			explosion.explode();
 			if (explosion.isPlayer() && explosion.isFinished()) {
-				if (player.getHealth() == 0) {
+				if (player.getHealth() < 0) {
 					isend = true;
 					clip.stop();
 					Main.gotoScoreBoard();

@@ -64,6 +64,7 @@ public class SpaceShipController extends Controller {
 				if (player.bulletTimeCount >= 100 / player.getFireRate()) {
 					PlayerBullet bullet = new PlayerBullet(player.positionX + (player.getWidth() / 2),
 							player.positionY + (player.getHeight() / 2), 1000, 0, player);
+					Main.loader.enemyBulletSound.play();
 					bullet.positionY -= bullet.getHeight() / 2;
 					PlayerBullet.getBulletList().add(bullet);
 					player.bulletTimeCount = 0;

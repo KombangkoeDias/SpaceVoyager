@@ -1,5 +1,4 @@
 package logic;
-
 import gui.GameOverScreen;
 import gui.InGameScreen;
 
@@ -11,14 +10,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static Loader loader = new Loader();
 	public static InGameScreen inGameScreen;
-	static Scene scene;
+	public static Scene scene;
 	public static Stage permanentStage = new Stage();
-
+	public static Main main = null;
+	public static void setMain(Main main) {
+		Main.main = main;
+	}
+	public Main() {
+		setMain(this);
+	}
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		MainMenu mainmenu = new MainMenu();

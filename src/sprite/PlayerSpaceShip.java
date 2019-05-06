@@ -16,7 +16,7 @@ public class PlayerSpaceShip extends SpaceShip {
 
 	public PlayerSpaceShip(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
-		this.health = 3;
+		this.health = 2;
 		this.firePower = 10;
 		this.fireRate = 10;
 		this.speed = 300;
@@ -27,17 +27,17 @@ public class PlayerSpaceShip extends SpaceShip {
 		if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerSpaceShipImage)) {
 			this.firePower = 15;
 			this.fireRate = 10;
-			this.health = 3;
+			this.health = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerSecondShipImage)) {
 			this.firePower = 10;
 			this.fireRate = 15;
-			this.health = 3;
+			this.health = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerThirdShipImage)) {
 			this.firePower = 10;
 			this.fireRate = 10;
-			this.health = 4;
+			this.health = 3;
 		}
 	}
 
