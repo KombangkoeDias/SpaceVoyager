@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import logic.Main;
 
 public class GameOverScreen extends Pane{
 	private int score;
@@ -31,6 +32,7 @@ public class GameOverScreen extends Pane{
 			e.printStackTrace();
 		}
 		this.setStyle("-fx-background-image: url('file:res/startSpace.jpg')");	
+		MainMenu.audio.play();
 	}
 	public void GameOver() {
 		Text GameOverText = new Text("Game Over!");
@@ -111,6 +113,7 @@ public class GameOverScreen extends Pane{
 		exitButton.setStyle("-fx-background-color: #FF0000");
 		exitButton.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 30));
 		exitButton.setOnAction(click -> {
+			MainMenu.audio.stop();
 			System.exit(1);
 		});
 		this.getChildren().add(exitButton);	
