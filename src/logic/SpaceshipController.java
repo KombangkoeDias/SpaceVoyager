@@ -3,13 +3,13 @@ package logic;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import sprite.PlayerBullet;
-import sprite.PlayerSpaceShip;
+import sprite.PlayerSpaceship;
 
-public class SpaceShipController extends Controller {
+public class SpaceshipController extends Controller {
 
-	private PlayerSpaceShip player;
+	private PlayerSpaceship player;
 
-	public SpaceShipController(PlayerSpaceShip spaceship) {
+	public SpaceshipController(PlayerSpaceship spaceship) {
 		super();
 		this.player = spaceship;
 	}
@@ -64,7 +64,6 @@ public class SpaceShipController extends Controller {
 				if (player.bulletTimeCount >= 100 / player.getFireRate()) {
 					PlayerBullet bullet = new PlayerBullet(player.positionX + (player.getWidth() / 2),
 							player.positionY + (player.getHeight() / 2), 1000, 0, player);
-					Main.loader.enemyBulletSound.play();
 					bullet.positionY -= bullet.getHeight() / 2;
 					PlayerBullet.getBulletList().add(bullet);
 					player.bulletTimeCount = 0;
@@ -74,7 +73,7 @@ public class SpaceShipController extends Controller {
 		
 	}
 
-	public PlayerSpaceShip getSpaceship() {
+	public PlayerSpaceship getSpaceship() {
 		return player;
 	}
 

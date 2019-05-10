@@ -6,7 +6,7 @@ import javafx.scene.media.AudioClip;
 public class Loader {
 	
 	public Image backgroundImage;
-	public Image playerSpaceShipImage;
+	public Image menuBackground;
 	public Image playerBeamImage;
 	public Image asteroidImage;
 	public Image explosionImage;
@@ -23,10 +23,12 @@ public class Loader {
 	public Image bigStarImage;
 	public Image mediumStarImage;
 	public Image smallStarImage;
+	public Image playerFirstShipImage;
 	public Image playerSecondShipImage;
 	public Image playerThirdShipImage;
 	public Image playerChosenSpaceShipImage;
-	public AudioClip gamePlaySound;
+	public AudioClip inGameMusic;
+	public AudioClip menuMusic;
 	public AudioClip bigStarSound;
 	public AudioClip mediumStarSound;
 	public AudioClip smallStarSound;
@@ -36,12 +38,14 @@ public class Loader {
 	public Loader() {
 		
 		this.backgroundImage = new Image("file:res/space.jpg");
-		this.playerSpaceShipImage = new Image("file:res/spaceship0.png");
+		this.menuBackground = new Image("file:res/startSpace.jpg");
+		
+		this.playerFirstShipImage = new Image("file:res/spaceship1.png");
+		this.playerSecondShipImage = new Image("file:res/spaceship2.png");
+		this.playerThirdShipImage = new Image("file:res/spaceship3.png");
 		this.playerBeamImage = new Image("file:res/beam.png");
 		this.asteroidImage = new Image("file:res/asteroid.png");
 		this.explosionImage = new Image("file:res/explosion.png");
-		this.playerSecondShipImage = new Image("file:res/spaceship2.png");
-		this.playerThirdShipImage = new Image("file:res/spaceship3.png");
 		
 		this.enemyShipBeige = new Image("file:res/shipBeige.png");
 		this.enemyShipBlue = new Image("file:res/shipBlue.png");
@@ -59,7 +63,8 @@ public class Loader {
 		this.mediumStarImage = new Image("file:res/medium_star.png");
 		this.smallStarImage = new Image("file:res/small_star.png");
 		
-		this.gamePlaySound = new AudioClip(getClass().getClassLoader().getResource("music.mp3").toString());
+		this.inGameMusic = new AudioClip(getClass().getClassLoader().getResource("gameMusic.mp3").toString());
+		this.menuMusic = new AudioClip(getClass().getClassLoader().getResource("SpaceTheme.wav").toString());
 		this.bigStarSound = new AudioClip(getClass().getClassLoader().getResource("bigStar.mp3").toString());
 		this.mediumStarSound = new AudioClip(getClass().getClassLoader().getResource("mediumStar.mp3").toString());
 		this.smallStarSound = new AudioClip(getClass().getClassLoader().getResource("smallStar.mp3").toString());

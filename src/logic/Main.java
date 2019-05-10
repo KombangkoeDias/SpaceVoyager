@@ -36,10 +36,11 @@ public class Main extends Application
 	}
 	
 
-	public static void goToGame() throws Exception
+	public static void goToGame()
 	{
+		InGameScreen.clear();
 		inGameScreen = new InGameScreen();
-		InGameScreen.inGameTimer.spaceShipController.setUpController();
+		inGameScreen.inGameTimer.spaceShipController.setUpController();
 		scene.setRoot(inGameScreen);
 		permanentStage.setScene(scene);
 		permanentStage.show();
@@ -53,6 +54,7 @@ public class Main extends Application
 		permanentStage.show();
 	}
 	public static void gotoScoreBoard() {
+		inGameScreen.inGameTimer.stop();
 		GameOverScreen gameover = new GameOverScreen();
 		scene.setRoot(gameover);
 		permanentStage.setScene(scene);

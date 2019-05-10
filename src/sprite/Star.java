@@ -1,6 +1,5 @@
 package sprite;
 
-import gui.InGameScreen;
 import logic.Main;
 
 public abstract class Star extends Sprite implements Item {
@@ -32,8 +31,8 @@ public abstract class Star extends Sprite implements Item {
 	
 	@Override
 	public Sprite checkCollide() {
-		if (this.intersects(InGameScreen.inGameTimer.player) && InGameScreen.inGameTimer.player.isVisible()) {
-			return InGameScreen.inGameTimer.player;
+		if (this.intersects(Main.inGameScreen.inGameTimer.player) && Main.inGameScreen.inGameTimer.player.isVisible()) {
+			return Main.inGameScreen.inGameTimer.player;
 		}
 		return null;
 	}

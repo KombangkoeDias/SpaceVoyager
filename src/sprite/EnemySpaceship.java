@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import logic.Main;
 
-public class EnemySpaceShip extends SpaceShip implements Enemy {
+public class EnemySpaceship extends Spaceship implements Enemy {
 	
-	private static ArrayList<EnemySpaceShip> enemySpaceShipList = new ArrayList<EnemySpaceShip>();
+	private static ArrayList<EnemySpaceship> enemySpaceShipList = new ArrayList<EnemySpaceship>();
 	private int maxHealth;
 	private int remainingHealth;
 	private double stopPositionX;
@@ -21,7 +21,7 @@ public class EnemySpaceShip extends SpaceShip implements Enemy {
 	private static final int PINK = 3;
 	private static final int YELLOW = 4;
 
-	public EnemySpaceShip(double positionX, double positionY, double velocityX, double velocityY) {
+	public EnemySpaceship(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
 		this.maxHealth = (int) (Math.random() * 100 + 100);
 		this.remainingHealth = this.maxHealth;
@@ -34,7 +34,7 @@ public class EnemySpaceShip extends SpaceShip implements Enemy {
 		
 		double positionY = Math.random() * (Main.HEIGHT - 80);
 		double velocityX = -(Math.random() * 200 + 100);
-		EnemySpaceShip enemy = new EnemySpaceShip(Main.WIDTH, positionY, velocityX, 0);
+		EnemySpaceship enemy = new EnemySpaceship(Main.WIDTH, positionY, velocityX, 0);
 		enemy.type = (int) (Math.random() * 5);
 		switch(enemy.type) {
 			case BEIGE:
@@ -66,16 +66,15 @@ public class EnemySpaceShip extends SpaceShip implements Enemy {
 	
 	@Override
 	public void doDamage(Sprite sprite) {
-		if (sprite instanceof PlayerSpaceShip) {
-			PlayerSpaceShip player = (PlayerSpaceShip) sprite;
+		if (sprite instanceof PlayerSpaceship) {
+			PlayerSpaceship player = (PlayerSpaceship) sprite;
 			if (player.isAlive()) {
-				player.receivedDamage(1);
+				player.die();
 			}
 		}
 	}
 	
-	@Override
-	public void receivedDamage(int damage) {
+	public void receiveDamage(int damage) {
 		remainingHealth = remainingHealth - damage;
 		if (remainingHealth <= 0) {
 			Explosion.generateExplosion(this);
@@ -92,7 +91,7 @@ public class EnemySpaceShip extends SpaceShip implements Enemy {
 	
 	@Override
 	public void disappear() {
-		EnemySpaceShip enemy = this;
+		EnemySpaceship enemy = this;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -111,7 +110,7 @@ public class EnemySpaceShip extends SpaceShip implements Enemy {
 		MoveAgain = true;
 	}
 	
-	public static ArrayList<EnemySpaceShip> getEnemySpaceShipList() {
+	public static ArrayList<EnemySpaceship> getEnemySpaceShipList() {
 		return enemySpaceShipList;
 	}
 

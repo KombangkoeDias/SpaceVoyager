@@ -2,21 +2,20 @@ package sprite;
 
 import java.util.ArrayList;
 
-import gui.InGameScreen;
 import javafx.application.Platform;
 import logic.Main;
 
 public class EnemyBullet extends Bullet implements EnemyWeapon {
 	
 	private static ArrayList<EnemyBullet> bulletList = new ArrayList<EnemyBullet>();
-	private EnemySpaceShip shooter;
+	private EnemySpaceship shooter;
 	private static final int BEIGE = 0;
 	private static final int BLUE = 1;
 	private static final int GREEN = 2;
 	private static final int PINK = 3;
 	private static final int YELLOW = 4;
 
-	public EnemyBullet(double positionX, double positionY, double velocityX, double velocityY, EnemySpaceShip shooter) {
+	public EnemyBullet(double positionX, double positionY, double velocityX, double velocityY, EnemySpaceship shooter) {
 		super(positionX, positionY, velocityX, velocityY);
 		this.shooter = shooter;
 		switch(shooter.getType()) {
@@ -40,18 +39,18 @@ public class EnemyBullet extends Bullet implements EnemyWeapon {
 	
 	@Override
 	public void doDamage(Sprite sprite) {
-		if (sprite instanceof PlayerSpaceShip) {
-			PlayerSpaceShip player = (PlayerSpaceShip) sprite;
+		if (sprite instanceof PlayerSpaceship) {
+			PlayerSpaceship player = (PlayerSpaceship) sprite;
 			if (player.isAlive()) {
-					player.receivedDamage(1);
+					player.die();
 			}
 		}
 	}
 
 	@Override
 	public Sprite checkCollide() {
-		if (this.intersects(InGameScreen.inGameTimer.player) && InGameScreen.inGameTimer.player.isVisible()) {
-			return InGameScreen.inGameTimer.player;
+		if (this.intersects(Main.inGameScreen.inGameTimer.player) && Main.inGameScreen.inGameTimer.player.isVisible()) {
+			return Main.inGameScreen.inGameTimer.player;
 		}
 		return null;
 	}
@@ -71,7 +70,7 @@ public class EnemyBullet extends Bullet implements EnemyWeapon {
 		return bulletList;
 	}
 
-	public EnemySpaceShip getShooter() {
+	public EnemySpaceship getShooter() {
 		return shooter;
 	}
 

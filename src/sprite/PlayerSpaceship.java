@@ -1,11 +1,12 @@
 package sprite;
 
+import gui.InGameScreen;
 import javafx.application.Platform;
 import logic.Main;
 
-public class PlayerSpaceShip extends SpaceShip {
+public class PlayerSpaceship extends Spaceship {
 	
-	private int health;
+	private int life;
 	private int firePower;
 	private int fireRate;
 	private int speed;
@@ -14,9 +15,9 @@ public class PlayerSpaceShip extends SpaceShip {
 	private boolean visible;
 	private boolean alive;
 
-	public PlayerSpaceShip(double positionX, double positionY, double velocityX, double velocityY) {
+	public PlayerSpaceship(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
-		this.health = 2;
+		this.life = 2;
 		this.firePower = 10;
 		this.fireRate = 10;
 		this.speed = 300;
@@ -24,20 +25,20 @@ public class PlayerSpaceShip extends SpaceShip {
 		this.visible = true;
 		this.alive = true;
 		setImage(Main.loader.playerChosenSpaceShipImage);
-		if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerSpaceShipImage)) {
+		if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerFirstShipImage)) {
 			this.firePower = 15;
 			this.fireRate = 10;
-			this.health = 2;
+			this.life = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerSecondShipImage)) {
 			this.firePower = 10;
 			this.fireRate = 15;
-			this.health = 2;
+			this.life = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerThirdShipImage)) {
 			this.firePower = 10;
 			this.fireRate = 10;
-			this.health = 3;
+			this.life = 3;
 		}
 	}
 
@@ -61,8 +62,11 @@ public class PlayerSpaceShip extends SpaceShip {
 
 	}
 	
-	public void receivedDamage(int damage) {
-		health = health - damage;
+	public void reduceHealth() {
+		life = life - 1;
+	}
+	
+	public void die() {
 		Explosion.generateExplosion(this);
 		controllable = false;
 		visible = false;
@@ -73,13 +77,7 @@ public class PlayerSpaceShip extends SpaceShip {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				PlayerBullet.getBulletList().clear();
-				BigStar.getBigStarList().clear();
-				MediumStar.getMediumStarList().clear();
-				SmallStar.getSmallStarList().clear();
-				Asteroid.getAsteroidList().clear();
-				EnemySpaceShip.getEnemySpaceShipList().clear();
-				EnemyBullet.getBulletList().clear();
+				InGameScreen.clear();
 			}
 		});
 		this.positionX = 100;
@@ -90,7 +88,7 @@ public class PlayerSpaceShip extends SpaceShip {
 	}
 
 	public int getHealth() {
-		return health;
+		return life;
 	}
 
 	public int getFirePower() {

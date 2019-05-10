@@ -7,7 +7,7 @@ import logic.Main;
 
 public class MediumStar extends Star {
 	
-	public static final int SCORE = 1000;
+	public static final int SCORE = 500;
 	private static ArrayList<MediumStar> mediumStarList = new ArrayList<MediumStar>();
 	
 	public MediumStar(double positionX, double positionY, double velocityX, double velocityY) {

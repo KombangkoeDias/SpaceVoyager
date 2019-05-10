@@ -22,11 +22,12 @@ public class Asteroid extends Sprite implements Enemy {
 		asteroidList.add(asteroid);
 	}
 	
+	@Override
 	public void doDamage(Sprite sprite) {
-		if (sprite instanceof PlayerSpaceShip) {
-			PlayerSpaceShip player = (PlayerSpaceShip) sprite;
+		if (sprite instanceof PlayerSpaceship) {
+			PlayerSpaceship player = (PlayerSpaceship) sprite;
 			if (player.isAlive()) {
-				player.receivedDamage(1);
+				player.die();
 			}
 		}
 	}

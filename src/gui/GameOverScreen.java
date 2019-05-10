@@ -10,30 +10,31 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import logic.Main;
 
-public class GameOverScreen extends Pane{
+public class GameOverScreen extends Pane {
+	
 	private int score;
 	private int smCount;
 	private int mdCount;
 	private int bgCount;
 	private int killCount;
+
 	public GameOverScreen() {
-		this.score = InGameScreen.inGameTimer.getScore();
-		this.smCount = InGameScreen.inGameTimer.getsmCount();
-		this.mdCount = InGameScreen.inGameTimer.getmdCount();
-		this.bgCount = InGameScreen.inGameTimer.getbgCount();
-		this.killCount = InGameScreen.inGameTimer.getKill();
+		this.score = Main.inGameScreen.inGameTimer.getScore();
+		this.smCount = Main.inGameScreen.inGameTimer.getsmCount();
+		this.mdCount = Main.inGameScreen.inGameTimer.getmdCount();
+		this.bgCount = Main.inGameScreen.inGameTimer.getbgCount();
+		this.killCount = Main.inGameScreen.inGameTimer.getKill();
 		GameOver();
 		setResultText();
-		try
-		{
+		try {
 			setButton();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.setStyle("-fx-background-image: url('file:res/startSpace.jpg')");	
+		this.setStyle("-fx-background-image: url('file:res/startSpace.jpg')");
 		MainMenu.audio.play();
 	}
+
 	public void GameOver() {
 		Text GameOverText = new Text("Game Over!");
 		GameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 70));
@@ -51,17 +52,15 @@ public class GameOverScreen extends Pane{
 		GameOverText.setEffect(ds);
 		this.getChildren().add(GameOverText);
 	}
+
 	public void setResultText() {
 		String Score = "Your score is: " + this.score;
 		Text largeScore = new Text(Score);
 		String smText = "Small stars collected: " + this.smCount;
 		String mdText = "Medium stars collected: " + this.mdCount;
 		String bgText = "Big stars collected: " + this.bgCount;
-		String kill = "Enemy defected: " + this.killCount;
-		Text score = new Text(smText +
-					"\n"+	  mdText +
-					"\n"+	  bgText +
-					"\n"+	  kill);
+		String kill = "Enemy defeated: " + this.killCount;
+		Text score = new Text(smText + "\n" + mdText + "\n" + bgText + "\n" + kill);
 		score.setLineSpacing(20);
 		largeScore.setFill(Color.WHITE);
 		score.setFill(Color.WHITE);
@@ -84,28 +83,23 @@ public class GameOverScreen extends Pane{
 		score.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 30));
 		this.getChildren().add(score);
 	}
+
 	public void setButton() throws Exception {
-		/*
-		GameButton button = new GameButton(535,500);
-		button.seteffect();
-		button.setText("Try Again");
-		button.setTextFill(Color.AQUAMARINE);
-		button.setPrefSize(200, 20);
-		button.setStyle("-fx-background-color: #7FFFD4");
-		button.setTextFill(Color.GRAY);
-		button.setFont(Font.font("Arial", FontWeight.LIGHT, 30));
-		button.setOnAction(click -> {
-			InGameScreen.inGameTimer.isend = false;
-			MainMenu mainmenu = new MainMenu();
-			Main.scene = new Scene(mainmenu, Main.WIDTH-15, Main.HEIGHT-15);
-			Main.permanentStage.setScene(Main.scene);
-			Main.permanentStage.setResizable(false);
-			Main.permanentStage.setTitle("Space Voyage");
-			Main.permanentStage.show();
-		});
-		this.getChildren().add(button);
-		*/
-		GameButton exitButton = new GameButton(560,600);
+		
+		 GameButton button = new GameButton(535,500);
+		 button.seteffect();
+		 button.setText("Try Again"); button.setTextFill(Color.AQUAMARINE);
+		 button.setPrefSize(200, 20);
+		 button.setStyle("-fx-background-color: #7FFFD4");
+		 button.setTextFill(Color.GRAY); button.setFont(Font.font("Arial",
+		 FontWeight.LIGHT, 30));
+		 button.setOnAction(click -> {
+			MainMenu.audio.stop();
+			Main.goToGame();
+		 });
+		 this.getChildren().add(button);
+		 
+		GameButton exitButton = new GameButton(560, 600);
 		exitButton.seteffect();
 		exitButton.setText("Exit");
 		exitButton.setTextFill(Color.BLACK);
@@ -116,6 +110,6 @@ public class GameOverScreen extends Pane{
 			MainMenu.audio.stop();
 			System.exit(1);
 		});
-		this.getChildren().add(exitButton);	
+		this.getChildren().add(exitButton);
 	}
 }

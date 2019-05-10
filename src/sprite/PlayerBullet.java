@@ -8,9 +8,9 @@ import logic.Main;
 public class PlayerBullet extends Bullet implements PlayerWeapon {
 
 	private static ArrayList<PlayerBullet> bulletList = new ArrayList<PlayerBullet>();
-	private PlayerSpaceShip shooter;
+	private PlayerSpaceship shooter;
 
-	public PlayerBullet(double positionX, double positionY, double velocityX, double velocityY, PlayerSpaceShip shooter) {
+	public PlayerBullet(double positionX, double positionY, double velocityX, double velocityY, PlayerSpaceship shooter) {
 		super(positionX, positionY, velocityX, velocityY);
 		this.shooter = shooter;
 		setImage(Main.loader.playerBeamImage);
@@ -18,9 +18,9 @@ public class PlayerBullet extends Bullet implements PlayerWeapon {
 	
 	@Override
 	public void doDamage(Sprite sprite) {
-		if (sprite instanceof EnemySpaceShip) {
-			EnemySpaceShip enemy = (EnemySpaceShip) sprite;
-			enemy.receivedDamage(shooter.getFirePower());
+		if (sprite instanceof EnemySpaceship) {
+			EnemySpaceship enemy = (EnemySpaceship) sprite;
+			enemy.receiveDamage(shooter.getFirePower());
 		}
 	}
 
@@ -31,7 +31,7 @@ public class PlayerBullet extends Bullet implements PlayerWeapon {
 				return asteroid;
 			}
 		}
-		for (EnemySpaceShip enemy : EnemySpaceShip.getEnemySpaceShipList()) {
+		for (EnemySpaceship enemy : EnemySpaceship.getEnemySpaceShipList()) {
 			if (enemy.intersects(this)) {
 				return enemy;
 			}
@@ -54,7 +54,7 @@ public class PlayerBullet extends Bullet implements PlayerWeapon {
 		return bulletList;
 	}
 
-	public PlayerSpaceShip getShooter() {
+	public PlayerSpaceship getShooter() {
 		return shooter;
 	}
 

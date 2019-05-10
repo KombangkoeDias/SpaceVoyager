@@ -28,19 +28,19 @@ public class SelectMenu extends Pane
 		GameButton firstButton = new GameButton(370,200);
 		GameButton secondButton = new GameButton(370,350);
 		GameButton thirdButton = new GameButton(370,500);
-		firstButton.sayText("SpaceShip 1" + 
-							"\n" + "Power: High" + 
-							"\n" + "FireRate: Medium" +
-							"\n" + "Health: Medium");
-		secondButton.sayText("SpaceShip 2"+ 
-							"\n" + "Power: Medium" + 
-							"\n" + "FireRate: High" +
-							"\n" + "Health: Medium");
-		thirdButton.sayText("SpaceShip 3" + 
-							"\n" + "Power: Medium" + 
-							"\n" + "FireRate: Medium" +
-							"\n" + "Health: High");
-		firstButton.setImage(loader.playerSpaceShipImage);
+		firstButton.sayText("Spaceship 1" + 
+							"\n" + "Power : High" + 
+							"\n" + "FireRate : Medium" +
+							"\n" + "Health : Medium");
+		secondButton.sayText("Spaceship 2"+ 
+							"\n" + "Power : Medium" + 
+							"\n" + "FireRate : High" +
+							"\n" + "Health : Medium");
+		thirdButton.sayText("Spaceship 3" + 
+							"\n" + "Power : Medium" + 
+							"\n" + "FireRate : Medium" +
+							"\n" + "Health : High");
+		firstButton.setImage(loader.playerFirstShipImage);
 		secondButton.setImage(loader.playerSecondShipImage);
 		thirdButton.setImage(loader.playerThirdShipImage);
 		buttonlist.add(firstButton);
@@ -78,7 +78,7 @@ public class SelectMenu extends Pane
 		InnerShadow is = new InnerShadow();
 		is.setOffsetX(5.0f);
 		is.setOffsetY(5.0f);
-		Text text = new Text("Let's begin the Voyage!!" + "\n" + "Choose one SpaceCraft to begin");
+		Text text = new Text("Let's begin the Voyage!!" + "\n" + "Choose one Spacecraft to begin");
 		text.setEffect(is);
 		text.setEffect(ds);
 		text.setLayoutX(120);

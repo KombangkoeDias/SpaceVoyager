@@ -2,7 +2,6 @@ package sprite;
 
 import java.util.ArrayList;
 
-import gui.InGameScreen;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -28,7 +27,7 @@ public class Explosion extends Sprite {
 	
 	public static void generateExplosion(Sprite sprite) {
 		Explosion explosion = new Explosion(sprite.positionX, sprite.positionY, 0, 0);
-		if (sprite instanceof PlayerSpaceShip) {
+		if (sprite instanceof PlayerSpaceship) {
 			explosion.isPlayer = true;
 		}
 		explosionList.add(explosion);
@@ -37,8 +36,8 @@ public class Explosion extends Sprite {
 	
 	public void explode() {
 		croppedExplosion = new WritableImage (explosionImage.getPixelReader(), 
-				(int) frameX * 125 + 30, (int) frameY * 130 + 30, 64, 64);
-		InGameScreen.inGameTimer.gc.drawImage(croppedExplosion, positionX, positionY);
+				frameX * 125 + 30, frameY * 130 + 30, 64, 64);
+		Main.inGameScreen.inGameTimer.gc.drawImage(croppedExplosion, positionX, positionY);
 		explosionCounter++;
 		if(explosionCounter >= 5) {
 			frameX++;

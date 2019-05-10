@@ -6,12 +6,19 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import logic.InGameTimer;
 import logic.Main;
-import logic.SpaceShipController;
-import sprite.PlayerSpaceShip;
+import logic.SpaceshipController;
+import sprite.Asteroid;
+import sprite.BigStar;
+import sprite.EnemyBullet;
+import sprite.EnemySpaceship;
+import sprite.MediumStar;
+import sprite.PlayerBullet;
+import sprite.PlayerSpaceship;
+import sprite.SmallStar;
 
 public class InGameScreen extends Group {
 
-	public static InGameTimer inGameTimer;
+	public InGameTimer inGameTimer;
 
 	public InGameScreen() {
 
@@ -21,18 +28,22 @@ public class InGameScreen extends Group {
 		this.getChildren().add(canvas);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		PlayerSpaceShip player = new PlayerSpaceShip(100, Main.HEIGHT/2, 0, 0);
-		SpaceShipController spaceShipController = new SpaceShipController(player);
-		
-		
+		PlayerSpaceship player = new PlayerSpaceship(100, Main.HEIGHT/2, 0, 0);
+		SpaceshipController spaceShipController = new SpaceshipController(player);
 
 		inGameTimer = new InGameTimer(player, spaceShipController, gc);
-		inGameTimer.clip.play();
 		inGameTimer.start();
+		
 	}
-	public static void checkMusic() {
-		if (!Main.loader.gamePlaySound.isPlaying() && !inGameTimer.isend)
-			Main.loader.gamePlaySound.play();
+	
+	public static void clear() {
+		PlayerBullet.getBulletList().clear();
+		BigStar.getBigStarList().clear();
+		MediumStar.getMediumStarList().clear();
+		SmallStar.getSmallStarList().clear();
+		Asteroid.getAsteroidList().clear();
+		EnemySpaceship.getEnemySpaceShipList().clear();
+		EnemyBullet.getBulletList().clear();
 	}
 
 }

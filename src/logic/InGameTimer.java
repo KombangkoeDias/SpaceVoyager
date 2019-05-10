@@ -1,9 +1,6 @@
 package logic;
 
 import java.util.Iterator;
-
-
-import gui.InGameScreen;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,19 +11,19 @@ import javafx.scene.text.Font;
 import sprite.Asteroid;
 import sprite.BigStar;
 import sprite.EnemyBullet;
-import sprite.EnemySpaceShip;
+import sprite.EnemySpaceship;
 import sprite.Explosion;
 import sprite.MediumStar;
 import sprite.PlayerBullet;
-import sprite.PlayerSpaceShip;
+import sprite.PlayerSpaceship;
 import sprite.SmallStar;
 import sprite.Sprite;
 
 public class InGameTimer extends AnimationTimer {
 
 	public long lastNanoTime;
-	public PlayerSpaceShip player;
-	public SpaceShipController spaceShipController;
+	public PlayerSpaceship player;
+	public SpaceshipController spaceShipController;
 	public GraphicsContext gc;
 	private Image spaceBackground;
 	private int MinX;
@@ -36,9 +33,8 @@ public class InGameTimer extends AnimationTimer {
 	private int bgStarCount;
 	private int killCount;
 	public AudioClip clip;
-	public boolean isend = false;
 
-	public InGameTimer(PlayerSpaceShip player, SpaceShipController spaceShipController, GraphicsContext gc) {
+	public InGameTimer(PlayerSpaceship player, SpaceshipController spaceShipController, GraphicsContext gc) {
 		super();
 		this.lastNanoTime = System.nanoTime();
 		this.player = player;
@@ -46,13 +42,18 @@ public class InGameTimer extends AnimationTimer {
 		this.gc = gc;
 		this.spaceBackground = Main.loader.backgroundImage;
 		this.MinX = 0;
-		this.clip = Main.loader.gamePlaySound;
+		this.clip = Main.loader.inGameMusic;
 	}
 
 	@Override
 	public void handle(long currentNanoTime) {
+		
 		// Check if music ends
-		InGameScreen.checkMusic();
+		if (!clip.isPlaying()) {
+			clip.setPriority(10);
+			clip.play();
+		}
+		
 		// Calculate time between sections
 		double elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
 		lastNanoTime = currentNanoTime;
@@ -69,13 +70,6 @@ public class InGameTimer extends AnimationTimer {
 			MinX = 0;
 		}
 
-		// Player
-		spaceShipController.handleInput();
-		player.update(elapsedTime);
-		if (player.isVisible()) {
-			player.render(gc);
-		}
-
 		// Player Bullet
 		Iterator<PlayerBullet> bulletIter = PlayerBullet.getBulletList().iterator();
 		while (bulletIter.hasNext()) {
@@ -83,8 +77,8 @@ public class InGameTimer extends AnimationTimer {
 			bullet.update(elapsedTime);
 			Sprite collidedSprite = bullet.checkCollide();
 			if (bullet.checkOutOfScreen() || collidedSprite != null) {
-				if (collidedSprite instanceof EnemySpaceShip) {
-					EnemySpaceShip enemy = (EnemySpaceShip) collidedSprite;
+				if (collidedSprite instanceof EnemySpaceship) {
+					EnemySpaceship enemy = (EnemySpaceship) collidedSprite;
 					bullet.doDamage(enemy);
 					if (enemy.getRemainingHealth() <=0) {
 						killCount++;
@@ -151,7 +145,7 @@ public class InGameTimer extends AnimationTimer {
 		
 
 		// Asteroid
-		if (Math.random() < 0.05 && Asteroid.getAsteroidList().size() < 20) {
+		if (Math.random() < 0.03 && Asteroid.getAsteroidList().size() < 15) {
 			Asteroid.generateAsteroid();
 		}
 		Iterator<Asteroid> asteroidIter = Asteroid.getAsteroidList().iterator();
@@ -169,13 +163,13 @@ public class InGameTimer extends AnimationTimer {
 		}
 
 		// Enemy
-		if (Math.random() < 0.005 - EnemySpaceShip.getEnemySpaceShipList().size() * 0.001
-				&& EnemySpaceShip.getEnemySpaceShipList().size() < 5) {
-			EnemySpaceShip.generateEnemy();
+		if (Math.random() < 0.005 - EnemySpaceship.getEnemySpaceShipList().size() * 0.001
+				&& EnemySpaceship.getEnemySpaceShipList().size() < 5) {
+			EnemySpaceship.generateEnemy();
 		}
-		Iterator<EnemySpaceShip> enemyIter = EnemySpaceShip.getEnemySpaceShipList().iterator();
+		Iterator<EnemySpaceship> enemyIter = EnemySpaceship.getEnemySpaceShipList().iterator();
 		while (enemyIter.hasNext()) {
-			EnemySpaceShip enemy = enemyIter.next();
+			EnemySpaceship enemy = enemyIter.next();
 			enemy.update(elapsedTime);
 			if (!enemy.isStopped() && enemy.positionX < enemy.getStopPositionX()) {
 				enemy.stop();
@@ -188,7 +182,7 @@ public class InGameTimer extends AnimationTimer {
 				enemy.moveAgain();
 			}
 			enemy.bulletTimeCount++;
-			if (enemy.bulletTimeCount > 300 && enemy.isStopped() && !enemy.isMoveAgain() && !isend) {
+			if (enemy.bulletTimeCount > 300 && enemy.isStopped() && !enemy.isMoveAgain()) {
 				enemy.fireBullet();
 				enemy.bulletTimeCount = 0;
 			}
@@ -199,7 +193,6 @@ public class InGameTimer extends AnimationTimer {
 			gc.setFill(Color.GREEN);
 			gc.fillRect(enemy.positionX, enemy.positionY+70, 
 					(double) enemy.getRemainingHealth()/(double)enemy.getMaxHealth()*enemy.getWidth(), 10);
-			gc.setFill(Color.WHITE);
 		}
 
 		// Enemy Bullet
@@ -217,7 +210,6 @@ public class InGameTimer extends AnimationTimer {
 			else {
 				bullet.render(gc);
 			}
-			
 		}
 
 		// Explosion
@@ -226,8 +218,8 @@ public class InGameTimer extends AnimationTimer {
 			Explosion explosion = explosionIter.next();
 			explosion.explode();
 			if (explosion.isPlayer() && explosion.isFinished()) {
+				player.reduceHealth();
 				if (player.getHealth() < 0) {
-					isend = true;
 					clip.stop();
 					Main.gotoScoreBoard();
 				}
@@ -237,16 +229,25 @@ public class InGameTimer extends AnimationTimer {
 			}
 		}
 		
-		// Life
-		gc.setFont(Font.font(28));
-		if (player.getHealth() >= 0) {
-			gc.fillText("LIFE    :    " + player.getHealth(), 50, Main.HEIGHT - 50);
-		}
-		else {
-			gc.fillText("LIFE    :    0", 50, Main.HEIGHT - 50);
+		// Player
+		spaceShipController.handleInput();
+		player.update(elapsedTime);
+		if (player.isVisible()) {
+			player.render(gc);
 		}
 		
-		//Score
+		// Life
+		gc.setFont(Font.font(28));
+		if (player.isAlive()) {
+			gc.setFill(Color.WHITE);
+		}
+		else {
+			gc.setFill(Color.RED);
+		}
+		gc.fillText("LIFE    :    " + player.getHealth(), 50, Main.HEIGHT - 50);
+
+		// Score
+		gc.setFill(Color.WHITE);
 		String scoreText;
 		if (score < 10) {
 			scoreText = "00000" + score;
