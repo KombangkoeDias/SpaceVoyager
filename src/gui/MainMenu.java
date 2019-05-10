@@ -48,6 +48,7 @@ public class MainMenu extends Pane {
 		logoview.setFitWidth(600);
 		setRefText();
 		audio.setCycleCount(MediaPlayer.INDEFINITE);
+		audio.setPriority(10);
 		audio.play();
 
 	}
