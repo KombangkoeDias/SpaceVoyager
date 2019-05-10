@@ -17,27 +17,24 @@ public class PlayerSpaceship extends Spaceship {
 
 	public PlayerSpaceship(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
-		this.life = 2;
-		this.firePower = 10;
-		this.fireRate = 10;
 		this.speed = 300;
 		this.controllable = true;
 		this.visible = true;
 		this.alive = true;
 		setImage(Main.loader.playerChosenSpaceShipImage);
 		if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerFirstShipImage)) {
-			this.firePower = 15;
-			this.fireRate = 10;
+			this.firePower = 20;
+			this.fireRate = 3;
 			this.life = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerSecondShipImage)) {
-			this.firePower = 10;
-			this.fireRate = 15;
+			this.firePower = 5;
+			this.fireRate = 10;
 			this.life = 2;
 		}
 		else if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerThirdShipImage)) {
-			this.firePower = 10;
-			this.fireRate = 10;
+			this.firePower = 6;
+			this.fireRate = 6;
 			this.life = 3;
 		}
 	}

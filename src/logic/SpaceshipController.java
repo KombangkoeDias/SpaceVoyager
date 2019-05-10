@@ -61,7 +61,7 @@ public class SpaceshipController extends Controller {
 			}
 			if (input.contains("SPACE")) {
 				player.bulletTimeCount++;
-				if (player.bulletTimeCount >= 100 / player.getFireRate()) {
+				if (player.bulletTimeCount >= 60 / player.getFireRate()) {
 					PlayerBullet bullet = new PlayerBullet(player.positionX + (player.getWidth() / 2),
 							player.positionY + (player.getHeight() / 2), 1000, 0, player);
 					bullet.positionY -= bullet.getHeight() / 2;

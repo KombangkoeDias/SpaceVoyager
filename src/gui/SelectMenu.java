@@ -30,16 +30,16 @@ public class SelectMenu extends Pane
 		GameButton thirdButton = new GameButton(370,500);
 		firstButton.sayText("Spaceship 1" + 
 							"\n" + "Power : High" + 
-							"\n" + "FireRate : Medium" +
-							"\n" + "Health : Medium");
+							"\n" + "Fire Rate : Low" +
+							"\n" + "Life : 2");
 		secondButton.sayText("Spaceship 2"+ 
-							"\n" + "Power : Medium" + 
-							"\n" + "FireRate : High" +
-							"\n" + "Health : Medium");
+							"\n" + "Power : Low" + 
+							"\n" + "Fire Rate : High" +
+							"\n" + "Life : 2");
 		thirdButton.sayText("Spaceship 3" + 
 							"\n" + "Power : Medium" + 
-							"\n" + "FireRate : Medium" +
-							"\n" + "Health : High");
+							"\n" + "Fire Rate : Medium" +
+							"\n" + "Life : 3");
 		firstButton.setImage(loader.playerFirstShipImage);
 		secondButton.setImage(loader.playerSecondShipImage);
 		thirdButton.setImage(loader.playerThirdShipImage);
