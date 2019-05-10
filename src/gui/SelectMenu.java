@@ -46,6 +46,9 @@ public class SelectMenu extends Pane {
 		setAction();
 		setButton();
 		MakeTextvalue();
+		if (!MainMenu.audio.isPlaying()) {
+			MainMenu.audio.play();
+		}
 	}
 
 	public void setAction() {

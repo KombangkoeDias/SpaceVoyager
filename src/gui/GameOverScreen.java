@@ -95,8 +95,7 @@ public class GameOverScreen extends Pane {
 		button.setTextFill(Color.GRAY);
 		button.setFont(Font.font("Arial", FontWeight.LIGHT, 30));
 		button.setOnAction(click -> {
-			MainMenu.audio.stop();
-			Main.goToGame();
+			Main.gotoSelectMenu();
 		});
 		this.getChildren().add(button);
 

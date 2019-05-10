@@ -8,8 +8,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application
-{
+public class Main extends Application {
+	
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static Loader loader = new Loader();
@@ -17,9 +17,11 @@ public class Main extends Application
 	public static Scene scene;
 	public static Stage permanentStage = new Stage();
 	public static Main main = null;
+	
 	public static void setMain(Main main) {
 		Main.main = main;
 	}
+	
 	public Main() {
 		setMain(this);
 	}
@@ -32,12 +34,11 @@ public class Main extends Application
 		permanentStage.setScene(scene);
 		permanentStage.setResizable(false);
 		permanentStage.setTitle("Space Voyage");
+		permanentStage.getIcons().add(loader.playerFirstShipImage);
 		permanentStage.show();
 	}
-	
 
-	public static void goToGame()
-	{
+	public static void goToGame() {
 		InGameScreen.clear();
 		inGameScreen = new InGameScreen();
 		inGameScreen.inGameTimer.spaceShipController.setUpController();
@@ -46,13 +47,13 @@ public class Main extends Application
 		permanentStage.show();
 	}
 
-	public static void gotoSelectMenu()
-	{
+	public static void gotoSelectMenu() {
 		SelectMenu selectmenu = new SelectMenu();
 		scene.setRoot(selectmenu);
 		permanentStage.setScene(scene);
 		permanentStage.show();
 	}
+	
 	public static void gotoScoreBoard() {
 		inGameScreen.inGameTimer.stop();
 		GameOverScreen gameover = new GameOverScreen();
@@ -61,8 +62,7 @@ public class Main extends Application
 		permanentStage.show();
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		launch(args);
 	}
 }
