@@ -11,7 +11,7 @@ import javafx.scene.text.TextAlignment;
 import logic.Main;
 
 public class GameOverScreen extends Pane {
-	
+
 	private int score;
 	private int smCount;
 	private int mdCount;
@@ -85,20 +85,21 @@ public class GameOverScreen extends Pane {
 	}
 
 	public void setButton() throws Exception {
-		
-		 GameButton button = new GameButton(535,500);
-		 button.seteffect();
-		 button.setText("Try Again"); button.setTextFill(Color.AQUAMARINE);
-		 button.setPrefSize(200, 20);
-		 button.setStyle("-fx-background-color: #7FFFD4");
-		 button.setTextFill(Color.GRAY); button.setFont(Font.font("Arial",
-		 FontWeight.LIGHT, 30));
-		 button.setOnAction(click -> {
+
+		GameButton button = new GameButton(535, 500);
+		button.seteffect();
+		button.setText("Try Again");
+		button.setTextFill(Color.AQUAMARINE);
+		button.setPrefSize(200, 20);
+		button.setStyle("-fx-background-color: #7FFFD4");
+		button.setTextFill(Color.GRAY);
+		button.setFont(Font.font("Arial", FontWeight.LIGHT, 30));
+		button.setOnAction(click -> {
 			MainMenu.audio.stop();
 			Main.goToGame();
-		 });
-		 this.getChildren().add(button);
-		 
+		});
+		this.getChildren().add(button);
+
 		GameButton exitButton = new GameButton(560, 600);
 		exitButton.seteffect();
 		exitButton.setText("Exit");

@@ -14,12 +14,13 @@ import javafx.scene.text.Text;
 import logic.Main;
 
 public class MainMenu extends Pane {
+
 	private GameButton StartButton;
 	private GameButton ExitButton;
 	public static AudioClip audio = Main.loader.menuMusic;
-	
+
 	public MainMenu() {
-		
+
 		this.setStyle("-fx-background-image: url('file:res/startSpace.jpg')");
 		this.setPrefHeight(Main.HEIGHT);
 		this.setPrefWidth(Main.WIDTH);
