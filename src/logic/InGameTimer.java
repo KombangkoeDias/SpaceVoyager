@@ -86,7 +86,11 @@ public class InGameTimer extends AnimationTimer {
 				}
 				bullet.disappear();
 			} else {
-				bullet.render(gc);
+				try {
+					bullet.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Player Bullet", 40, 15, gc);
+				}
 			}
 		}
 		
@@ -105,7 +109,11 @@ public class InGameTimer extends AnimationTimer {
 				bigStar.disappear();
 			}
 			else {
-				bigStar.render(gc);
+				try {
+					bigStar.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Big Star", 96, 96, gc);
+				}
 			}
 		}
 		Iterator<MediumStar> mediumStarIter = MediumStar.getMediumStarList().iterator();
@@ -122,7 +130,11 @@ public class InGameTimer extends AnimationTimer {
 				mediumStar.disappear();
 			}
 			else {
-				mediumStar.render(gc);
+				try {
+					mediumStar.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Medium Star", 64, 64, gc);
+				}
 			}
 		}
 		Iterator<SmallStar> smallStarIter = SmallStar.getSmallStarList().iterator();
@@ -139,7 +151,11 @@ public class InGameTimer extends AnimationTimer {
 				smallStar.disappear();
 			}
 			else {
-				smallStar.render(gc);
+				try {
+					smallStar.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Small Star", 32, 32 , gc);
+				}
 			}
 		}
 		
@@ -155,7 +171,11 @@ public class InGameTimer extends AnimationTimer {
 			if (asteroid.checkOutOfScreen()) {
 				asteroid.disappear();
 			} else {
-				asteroid.render(gc);
+				try {
+					asteroid.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Asteroid", 64, 64, gc);
+				}
 			}
 			if (asteroid.intersects(player)) {
 				asteroid.doDamage(player);
@@ -174,7 +194,11 @@ public class InGameTimer extends AnimationTimer {
 			if (!enemy.isStopped() && enemy.positionX < enemy.getStopPositionX()) {
 				enemy.stop();
 			}
-			enemy.render(gc);
+			try {
+				enemy.render(gc);
+			} catch (RenderFailedException e) {
+				e.handle("Enemy", 64, 64, gc);
+			}
 			if (enemy.intersects(player)) {
 				enemy.doDamage(player);
 			}
@@ -208,7 +232,11 @@ public class InGameTimer extends AnimationTimer {
 				bullet.disappear();
 			}
 			else {
-				bullet.render(gc);
+				try {
+					bullet.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Enemy Bullet", 26, 26, gc);
+				}
 			}
 		}
 
@@ -233,7 +261,11 @@ public class InGameTimer extends AnimationTimer {
 		spaceShipController.handleInput();
 		player.update(elapsedTime);
 		if (player.isVisible()) {
-			player.render(gc);
+			try {
+				player.render(gc);
+			} catch (RenderFailedException e) {
+				e.handle("Player", 64, 64, gc);
+			}
 		}
 		
 		// Life

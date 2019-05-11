@@ -4,6 +4,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Main;
+import logic.RenderFailedException;
 
 public abstract class Sprite {
 	
@@ -27,8 +28,11 @@ public abstract class Sprite {
 		positionY += velocityY * time;
 	}
 
-	public void render(GraphicsContext gc) {
+	public void render(GraphicsContext gc) throws RenderFailedException {
 		gc.drawImage(image, positionX, positionY);
+		if (width == 0 || height == 0) {
+			throw new RenderFailedException(positionX, positionY);
+		}
 	}
 
 	public Rectangle2D getBoundary() {

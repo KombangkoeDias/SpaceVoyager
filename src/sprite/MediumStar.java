@@ -12,7 +12,7 @@ public class MediumStar extends Star {
 	
 	public MediumStar(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
-		this.image = Main.loader.mediumStarImage;
+		setImage(Main.loader.mediumStarImage);
 	}
 	
 	@Override

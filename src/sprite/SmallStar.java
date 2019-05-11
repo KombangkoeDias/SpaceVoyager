@@ -12,7 +12,7 @@ public class SmallStar extends Star {
 	
 	public SmallStar(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
-		this.image = Main.loader.smallStarImage;
+		setImage(Main.loader.smallStarImage);
 	}
 	
 	@Override
