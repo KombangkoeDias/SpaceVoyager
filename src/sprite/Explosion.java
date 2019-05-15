@@ -10,9 +10,7 @@ import logic.Main;
 public class Explosion extends Sprite {
 	
 	private static ArrayList<Explosion> explosionList = new ArrayList<Explosion>();
-	private static Image explosionImage = Main.loader.explosionImage;
-	private WritableImage croppedExplosion;
-	public int explosionCounter;
+	private int explosionCounter;
 	private int frameX;
 	private int frameY;
 	private boolean finished;
@@ -35,11 +33,12 @@ public class Explosion extends Sprite {
 	}
 	
 	public void explode() {
-		croppedExplosion = new WritableImage (explosionImage.getPixelReader(), 
+		Image explosionImage = Main.loader.explosionImage;
+		WritableImage croppedExplosion = new WritableImage (explosionImage.getPixelReader(), 
 				frameX * 125 + 30, frameY * 130 + 30, 64, 64);
 		Main.inGameScreen.inGameTimer.gc.drawImage(croppedExplosion, positionX, positionY);
 		explosionCounter++;
-		if(explosionCounter >= 5) {
+		if (explosionCounter >= 5) {
 			frameX++;
 			explosionCounter = 0;
 		}
@@ -65,10 +64,6 @@ public class Explosion extends Sprite {
 
 	public static ArrayList<Explosion> getExplosionList() {
 		return explosionList;
-	}
-
-	public WritableImage getCroppedExplosion() {
-		return croppedExplosion;
 	}
 
 	public boolean isFinished() {

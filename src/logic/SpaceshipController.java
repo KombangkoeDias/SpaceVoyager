@@ -48,16 +48,16 @@ public class SpaceshipController extends Controller {
 		player.velocityY = 0;
 		if (player.isControllable()) {
 			if (input.contains("UP")) {
-				player.addVelocityY(-player.getSpeed());
+				player.velocityY = player.velocityY - player.getSpeed();
 			}
 			if (input.contains("DOWN")) {
-				player.addVelocityY(player.getSpeed());
+				player.velocityY = player.velocityY + player.getSpeed();
 			}
 			if (input.contains("LEFT")) {
-				player.addVelocityX(-player.getSpeed());
+				player.velocityX = player.velocityX - player.getSpeed();
 			}
 			if (input.contains("RIGHT")) {
-				player.addVelocityX(player.getSpeed());
+				player.velocityX = player.velocityX + player.getSpeed();
 			}
 			if (input.contains("SPACE")) {
 				player.bulletTimeCount++;

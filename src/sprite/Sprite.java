@@ -27,6 +27,12 @@ public abstract class Sprite {
 		positionX += velocityX * time;
 		positionY += velocityY * time;
 	}
+	
+	public void setImage(Image image) {
+		this.image = image;
+		this.width = this.image.getWidth();
+		this.height = this.image.getHeight();
+	}
 
 	public void render(GraphicsContext gc) throws RenderFailedException {
 		gc.drawImage(image, positionX, positionY);
@@ -47,12 +53,6 @@ public abstract class Sprite {
 		return (this.positionX + this.width < 0 || this.positionX > Main.WIDTH || this.positionY + this.height < 0
 				|| this.positionY > Main.HEIGHT);
 	}
-	
-	public void setImage(Image image) {
-		this.image = image;
-		this.width = this.image.getWidth();
-		this.height = this.image.getHeight();
-	}
 
 	public double getWidth() {
 		return width;
@@ -60,14 +60,6 @@ public abstract class Sprite {
 
 	public double getHeight() {
 		return height;
-	}
-
-	public void addVelocityX(double velocityX) {
-		this.velocityX += velocityX;
-	}
-
-	public void addVelocityY(double velocityY) {
-		this.velocityY += velocityY;
 	}
 
 }

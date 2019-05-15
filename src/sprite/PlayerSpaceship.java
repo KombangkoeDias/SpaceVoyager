@@ -10,7 +10,7 @@ public class PlayerSpaceship extends Spaceship {
 	private int firePower;
 	private int fireRate;
 	private int speed;
-	public int bulletTimeCount = 0;
+	public int bulletTimeCount;
 	private boolean controllable;
 	private boolean visible;
 	private boolean alive;
@@ -21,6 +21,7 @@ public class PlayerSpaceship extends Spaceship {
 		this.controllable = true;
 		this.visible = true;
 		this.alive = true;
+		bulletTimeCount = 0;
 		setImage(Main.loader.playerChosenSpaceShipImage);
 		if (Main.loader.playerChosenSpaceShipImage.equals(Main.loader.playerFirstShipImage)) {
 			this.firePower = 20;
@@ -59,7 +60,7 @@ public class PlayerSpaceship extends Spaceship {
 
 	}
 	
-	public void reduceHealth() {
+	public void reduceLife() {
 		life = life - 1;
 	}
 	
@@ -84,7 +85,7 @@ public class PlayerSpaceship extends Spaceship {
 		this.alive = true;
 	}
 
-	public int getHealth() {
+	public int getLife() {
 		return life;
 	}
 

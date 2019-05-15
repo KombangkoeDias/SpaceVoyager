@@ -26,10 +26,6 @@ public class SmallStar extends Star {
 		});
 	}
 
-	public static int getScore() {
-		return SCORE;
-	}
-
 	public static ArrayList<SmallStar> getSmallStarList() {
 		return smallStarList;
 	}

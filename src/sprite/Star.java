@@ -3,6 +3,10 @@ package sprite;
 import logic.Main;
 
 public abstract class Star extends Sprite implements Item {
+
+	public Star(double positionX, double positionY, double velocityX, double velocityY) {
+		super(positionX, positionY, velocityX, velocityY);
+	}
 	
 	public static void generateStar(Sprite source) {
 		int quantity = (int) (Math.random() * 10);
@@ -23,10 +27,6 @@ public abstract class Star extends Sprite implements Item {
 				SmallStar.getSmallStarList().add(smallStar);
 			}
 		}
-	}
-
-	public Star(double positionX, double positionY, double velocityX, double velocityY) {
-		super(positionX, positionY, velocityX, velocityY);
 	}
 	
 	@Override

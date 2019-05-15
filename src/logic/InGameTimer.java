@@ -26,7 +26,7 @@ public class InGameTimer extends AnimationTimer {
 	public SpaceshipController spaceShipController;
 	public GraphicsContext gc;
 	private Image spaceBackground;
-	private int MinX;
+	private int minX;
 	private int score;
 	private int smStarCount;
 	private int mdStarCount;
@@ -41,14 +41,18 @@ public class InGameTimer extends AnimationTimer {
 		this.spaceShipController = spaceShipController;
 		this.gc = gc;
 		this.spaceBackground = Main.loader.backgroundImage;
-		this.MinX = 0;
+		this.minX = 0;
+		this.score = 0;
+		this.smStarCount = 0;
+		this.mdStarCount = 0;
+		this.bgStarCount = 0;
+		this.killCount = 0;
 		this.clip = Main.loader.inGameMusic;
 	}
 
 	@Override
 	public void handle(long currentNanoTime) {
 		
-		// Check if music ends
 		if (!clip.isPlaying()) {
 			clip.setPriority(10);
 			clip.play();
@@ -62,12 +66,12 @@ public class InGameTimer extends AnimationTimer {
 		gc.clearRect(0, 0, Main.WIDTH, Main.HEIGHT);
 
 		// Animate background
-		WritableImage croppedSpace = new WritableImage(spaceBackground.getPixelReader(), MinX, 0, Main.WIDTH,
+		WritableImage croppedSpace = new WritableImage(spaceBackground.getPixelReader(), minX, 0, Main.WIDTH,
 				Main.HEIGHT);
 		gc.drawImage(croppedSpace, 0, 0);
-		MinX = MinX + 5;
-		if (MinX >= spaceBackground.getWidth() * 2 / 3) {
-			MinX = 0;
+		minX = minX + 5;
+		if (minX >= spaceBackground.getWidth() * 2 / 3) {
+			minX = 0;
 		}
 
 		// Player Bullet
@@ -194,11 +198,6 @@ public class InGameTimer extends AnimationTimer {
 			if (!enemy.isStopped() && enemy.positionX < enemy.getStopPositionX()) {
 				enemy.stop();
 			}
-			try {
-				enemy.render(gc);
-			} catch (RenderFailedException e) {
-				e.handle("Enemy", 64, 64, gc);
-			}
 			if (enemy.intersects(player)) {
 				enemy.doDamage(player);
 			}
@@ -209,6 +208,16 @@ public class InGameTimer extends AnimationTimer {
 			if (enemy.bulletTimeCount > 300 && enemy.isStopped() && !enemy.isMoveAgain()) {
 				enemy.fireBullet();
 				enemy.bulletTimeCount = 0;
+			}
+			if (enemy.checkOutOfScreen()) {
+				enemy.disappear();
+			}
+			else {
+				try {
+					enemy.render(gc);
+				} catch (RenderFailedException e) {
+					e.handle("Enemy", 64, 64, gc);
+				}
 			}
 			
 			// Enemy's HP Bar
@@ -246,8 +255,8 @@ public class InGameTimer extends AnimationTimer {
 			Explosion explosion = explosionIter.next();
 			explosion.explode();
 			if (explosion.isPlayer() && explosion.isFinished()) {
-				player.reduceHealth();
-				if (player.getHealth() < 0) {
+				player.reduceLife();
+				if (player.getLife() < 0) {
 					clip.stop();
 					Main.gotoScoreBoard();
 				}
@@ -276,7 +285,7 @@ public class InGameTimer extends AnimationTimer {
 		else {
 			gc.setFill(Color.RED);
 		}
-		gc.fillText("LIFE    :    " + player.getHealth(), 50, Main.HEIGHT - 50);
+		gc.fillText("LIFE    :    " + player.getLife(), 50, Main.HEIGHT - 50);
 
 		// Score
 		gc.setFill(Color.WHITE);
@@ -309,7 +318,7 @@ public class InGameTimer extends AnimationTimer {
 	public int getScore() {
 		return score;
 	}
-	public int getsmCount(){
+	public int getsmCount() {
 		return smStarCount;
 	}
 	public int getmdCount() {

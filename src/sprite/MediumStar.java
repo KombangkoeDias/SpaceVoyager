@@ -25,11 +25,7 @@ public class MediumStar extends Star {
 			}
 		});
 	}
-
-	public static int getScore() {
-		return SCORE;
-	}
-
+	
 	public static ArrayList<MediumStar> getMediumStarList() {
 		return mediumStarList;
 	}

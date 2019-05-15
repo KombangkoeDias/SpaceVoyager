@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import logic.Main;
 
-public class PlayerBullet extends Bullet implements PlayerWeapon {
+public class PlayerBullet extends Bullet {
 
 	private static ArrayList<PlayerBullet> bulletList = new ArrayList<PlayerBullet>();
 	private PlayerSpaceship shooter;

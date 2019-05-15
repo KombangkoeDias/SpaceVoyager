@@ -11,23 +11,24 @@ public class EnemySpaceship extends Spaceship implements Enemy {
 	private int maxHealth;
 	private int remainingHealth;
 	private double stopPositionX;
-	private boolean Stopped;
-	private boolean MoveAgain;
+	private boolean stopped;
+	private boolean moveAgain;
 	private int type;
-	public int bulletTimeCount = 0;
-	private static final int BEIGE = 0;
-	private static final int BLUE = 1;
-	private static final int GREEN = 2;
-	private static final int PINK = 3;
-	private static final int YELLOW = 4;
+	public int bulletTimeCount;
+	public static final int BEIGE = 0;
+	public static final int BLUE = 1;
+	public static final int GREEN = 2;
+	public static final int PINK = 3;
+	public static final int YELLOW = 4;
 
 	public EnemySpaceship(double positionX, double positionY, double velocityX, double velocityY) {
 		super(positionX, positionY, velocityX, velocityY);
 		this.maxHealth = (int) (Math.random() * 100 + 100);
 		this.remainingHealth = this.maxHealth;
 		this.stopPositionX = Main.WIDTH - (Math.random() * 200 + 100);
-		this.Stopped = false;
-		this.MoveAgain = false;
+		this.stopped = false;
+		this.moveAgain = false;
+		this.bulletTimeCount = 0;
 	}
 
 	public static void generateEnemy() {
@@ -102,12 +103,12 @@ public class EnemySpaceship extends Spaceship implements Enemy {
 	
 	public void stop() {
 		velocityX = 0;
-		Stopped = true;
+		stopped = true;
 	}
 	
 	public void moveAgain() {
 		velocityX = -300;
-		MoveAgain = true;
+		moveAgain = true;
 	}
 	
 	public static ArrayList<EnemySpaceship> getEnemySpaceShipList() {
@@ -131,11 +132,11 @@ public class EnemySpaceship extends Spaceship implements Enemy {
 	}
 
 	public boolean isStopped() {
-		return Stopped;
+		return stopped;
 	}
 
 	public boolean isMoveAgain() {
-		return MoveAgain;
+		return moveAgain;
 	}
 
 }

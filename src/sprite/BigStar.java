@@ -26,10 +26,6 @@ public class BigStar extends Star {
 		});
 	}
 
-	public static int getScore() {
-		return SCORE;
-	}
-
 	public static ArrayList<BigStar> getBigStarList() {
 		return bigStarList;
 	}
